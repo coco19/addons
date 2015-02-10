@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding/__init__.py=utf-8
+encoding/__openerp__.py=utf-8
+encoding/capitulo.py=utf-8
+encoding/clasificador_enfermedades.py=utf-8
+encoding/diagnostico.py=utf-8
+encoding/medico.py=utf-8
+encoding/paciente.py=utf-8
+encoding/tratamiento_prolongado.py=utf-8

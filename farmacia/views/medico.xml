@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Añadimos el medico al sistema -->
+        <record model="ir.ui.view" id="medico_vista_form">
+            <field name="name">medico.form</field>
+            <field name="model">farmacia.medico</field>
+            <field name="arch" type="xml">
+            	<form>                    
+                    <sheet>
+                        <group col="4">              
+                        	<field name="nombre"/>
+                        	<field name="apellido"/>	
+                            <field name="numero_matricula"/>
+                            <field name="email"/>
+                            <field name="name" invisible="1"/>
+						</group>    
+                    </sheet>
+                </form>                
+            </field>
+        </record>
+         
+        <record model="ir.actions.act_window" id="accion_listar_medicos">
+            <field name="name">Medicos</field>
+            <field name="res_model">farmacia.medico</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crear medico
+                </p>
+            </field>
+            <!--  <field name="view_id" ref="medico_vista_form"></field>-->        
+        </record>
+        <menuitem id="gestion_hospitalaria" name="Gestion Hospitalaria"
+                  parent="menu_farmacia"/>
+        <menuitem id="menu_medico_lista" name="Medico"
+                  parent="gestion_hospitalaria"
+                  action="accion_listar_medicos"/>
+               
+    </data>
+
+</openerp>

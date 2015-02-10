@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    	<!-- Vista de formulario -->
+    	
+        <record model="ir.ui.view" id="tratamiento_prolongado_vista_formulario">
+            <field name="name">tratamiento_prolongado.form</field>
+            <field name="model">farmacia.tratamiento_prolongado</field>
+            <field name="arch" type="xml">
+                <form string="Trataminto Prolongado Form">                 	 
+                	<header>
+                	<!--                       
+                        <button name="action_confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="Mark as done" states="confirmed"
+                                class="oe_highlight"/>
+                    -->
+                        <field name="state" widget="statusbar"/>                    
+                    </header>                	                   
+                    <sheet>
+                        <group col="4">
+                        	<label for="id" string="Numero tratamiento prolongado"/>
+                        	<field name="id" nolabel="1"/>
+                            <!--  <field name="numeroTP" attrs = "{'readonly':True}"/> -->
+                            <field name="numero_receta"/>
+                            <field name="fecha_creacion"/>
+                            <field name="fecha_vencimiento"/> 
+                            <field name="prescripto_por"/>
+							<field name="pertenece_a"/>                                                      
+                        </group>                             	
+				<!-- notebook -->
+						<notebook>
+							<page string="Diagnosticos">
+								
+							</page>
+						</notebook>                                               
+                        <notebook>
+                        	<page string="Indicaciones">
+                        		<field name="indicaciones">
+                        			<tree editable="bottom">
+                        				<field name="dosificacion"/>
+                        				<field name="dias_de_tratamiento"/>                        
+                        			</tree>
+                        		</field>
+                        	</page>
+                            <page string="Observaciones">
+                                <field name="observaciones"/>
+                            </page>
+                            <page string="About">
+                                Este es un ejemplo de notebook
+                            </page>
+                        </notebook>
+                    </sheet>                       
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="tratamiento_prolongado_vista_arbol">
+        	<field name="name">tratamiento_prolongado.tree</field>
+        	<field name="model">farmacia.tratamiento_prolongado</field>
+        	<field name="arch" type="xml">
+        		<tree>
+        			<field name="id"/>
+        			<field name="numero_receta"/>
+        			<field name="fecha_creacion"/>
+        			<field name="fecha_vencimiento"/>
+        		</tree>
+        	</field>
+        </record>
+        
+        <record model="ir.ui.view" id="tratamiento_prolongado_vista_busqueda">
+            <field name="name">tratamientoProlongado.search</field>
+            <field name="model">farmacia.tratamiento_prolongado</field>
+            <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+                <field name="fecha_creacion"/>
+                <field name="numero_receta"/>
+            </search>
+            </field>
+        </record>   
+                <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="tratamiento_prolongado_accion_listar">
+            <field name="name">Tratamiento Prolongado</field>
+            <field name="res_model">farmacia.tratamiento_prolongado</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crear tratamiento prolongado
+                </p>
+            </field>
+        </record>
+
+        <!-- menu padre -->
+        <menuitem id="menu_principal_farmacia" name="Farmacia"/>
+        <!-- Menu en un primer lugar que aparece en el lado izquierdo y
+        	 será seleccionado antes de ejecutar la acción -->
+        <menuitem id="menu_farmacia" name="Farmacia"
+                  parent="menu_principal_farmacia"/>
+        <!-- el siguiente menu debe aparecer despues de menu_farmacia
+        	y lugo de la acción listar que llama -->
+        <menuitem id="menu_tratamiento_prolongado" name="Tratamiento Prolongado" parent="menu_farmacia"
+                  action="tratamiento_prolongado_accion_listar"/>
+        <!-- El id de localización completo sería:
+             action="farmacia.tratamiento_prolongado_accion_listar"
+             no es requerido cuando esta en el mismo modulo -->     
+	</data>
+</openerp>

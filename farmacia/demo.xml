@@ -1,0 +1,38 @@
+<openerp>
+    <data>
+    
+    	<!-- Tratamiento prolongado -->
+    	<!-- 
+        <record id="object0" model="farmacia.tratamiento_prolongado">
+        	<field name="numeroTP">1</field>
+        	<field name="numeroReceta">12</field>
+        	<field name="fechaCreacion" eval="'2015-04-07'"/>
+        	<field name="fechaVencimiento" eval="'2015-05-10'"/>
+        	<field name="observaciones">Tratamiento prolongado de ejemplo para
+        	probar campos
+        	</field>
+        </record>      
+         -->
+        <!-- Datos de prueba del codigo cie10 -->
+        
+        
+        
+        <!--  -->
+        <!--   <record id="object1" model="farmacia.farmacia"> -->
+        <!--     <field name="name">Object 1</field> -->
+        <!--   </record> -->
+        <!--  -->
+        <!--   <record id="object2" model="farmacia.farmacia"> -->
+        <!--     <field name="name">Object 2</field> -->
+        <!--   </record> -->
+        <!--  -->
+        <!--   <record id="object3" model="farmacia.farmacia"> -->
+        <!--     <field name="name">Object 3</field> -->
+        <!--   </record> -->
+        <!--  -->
+        <!--   <record id="object4" model="farmacia.farmacia"> -->
+        <!--     <field name="name">Object 4</field> -->
+        <!--   </record> -->
+        <!--  -->
+    </data>
+</openerp>
