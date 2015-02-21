@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="vendedor" model="res.groups">
+            <field name="name">Farmacia / Vendedor</field>
+        </record>  
+        <!-- 
+        <record id="vendedor_edicion" model="ir.rule">
+            <field name="name">Al estar activo no puede editar</field>
+            <field name="model_id" ref="model_farmacia_tratamiento_prolongado"/>
+            <field name="groups" eval="[(4, ref('farmacia.vendedor'))]"/>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('state','not in',('activo','[]'))]
+            </field>
+        </record>
+         -->
+         <!--  
+         <record id="vendedor_lectura" model="ir.rule">
+            <field name="name">Al estar activo no puede editar</field>
+            <field name="model_id" ref="model_farmacia_tratamiento_prolongado"/>
+            <field name="groups" eval="[(4, ref('farmacia.vendedor'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('state','not in',('activo','[]'))]
+            </field>
+        </record>
+        -->
+    </data>
+</openerp>
+

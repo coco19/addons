@@ -15,7 +15,6 @@
                             <field name="fecha_nacimiento"/>
                             <field name="domicilio"/>
                             <field name="telefono"/>
-                            <field name="numero_socio"/>
                             <field name="name" invisible="1"/>
 						</group>    
                     </sheet>

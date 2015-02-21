@@ -7,16 +7,16 @@
             <field name="name">tratamiento_prolongado.form</field>
             <field name="model">farmacia.tratamiento_prolongado</field>
             <field name="arch" type="xml">
-                <form string="Trataminto Prolongado Form">                 	 
+                <form string="Trataminto Prolongado Form"> 
+                	 
                 	<header>
-                	<!--                       
-                        <button name="action_confirm" type="object"
-                                string="Confirm" states="draft"
+                        <button name="activar" type="workflow"
+                                string="Activar" states="borrador"
+                                class="oe_highlight"/>            
+                        <!--tambien inactivo por morosidad -->        
+                        <button name="cancelar" type="workflow"
+                                string="Cancelar" states="activo" 
                                 class="oe_highlight"/>
-                        <button name="action_done" type="object"
-                                string="Mark as done" states="confirmed"
-                                class="oe_highlight"/>
-                    -->
                         <field name="state" widget="statusbar"/>                    
                     </header>                	                   
                     <sheet>
@@ -24,22 +24,29 @@
                         	<label for="id" string="Numero tratamiento prolongado"/>
                         	<field name="id" nolabel="1"/>
                             <!--  <field name="numeroTP" attrs = "{'readonly':True}"/> -->
+                            <field name="pertenece_a" filter_domain="['|',('dni', 'ilike', name)]"/>
+                            <field name="numero_afiliado"/>
                             <field name="numero_receta"/>
+                            <field name="afiliado_plan" attrs = "{'readonly':True}"/>
+                            <field name="paciente_dni" attrs = "{'readonly':True}"/>
+                            <field name="paciente_telefono" attrs = "{'readonly':True}"/>
+                            <field name="paciente_fecha_nacimiento" attrs = "{'readonly':True}"/>
+                            <field name="paciente_domicilio" attrs = "{'readonly':True}"/>
                             <field name="fecha_creacion"/>
                             <field name="fecha_vencimiento"/> 
                             <field name="prescripto_por"/>
-							<field name="pertenece_a"/>                                                      
                         </group>                             	
 				<!-- notebook -->
 						<notebook>
 							<page string="Diagnosticos">
-								
+								<field name="diagnosticos"/>
 							</page>
 						</notebook>                                               
                         <notebook>
                         	<page string="Indicaciones">
                         		<field name="indicaciones">
                         			<tree editable="bottom">
+                        				<field name="monodroga"/>
                         				<field name="dosificacion"/>
                         				<field name="dias_de_tratamiento"/>                        
                         			</tree>
@@ -48,24 +55,28 @@
                             <page string="Observaciones">
                                 <field name="observaciones"/>
                             </page>
+                            <!--  
                             <page string="About">
                                 Este es un ejemplo de notebook
                             </page>
+                            -->
                         </notebook>
                     </sheet>                       
                 </form>
             </field>
         </record>
         
+        <!-- vista de lista -->
         <record model="ir.ui.view" id="tratamiento_prolongado_vista_arbol">
         	<field name="name">tratamiento_prolongado.tree</field>
         	<field name="model">farmacia.tratamiento_prolongado</field>
         	<field name="arch" type="xml">
-        		<tree>
+        		<tree string="Lista tratamiento prolongado" colors="blue:state=='borrador';green:state=='activo';red:state in 'vencido, cancelado'">
         			<field name="id"/>
         			<field name="numero_receta"/>
         			<field name="fecha_creacion"/>
         			<field name="fecha_vencimiento"/>
+        			<field name="state"/>
         		</tree>
         	</field>
         </record>
@@ -90,6 +101,7 @@
             <field name="name">Tratamiento Prolongado</field>
             <field name="res_model">farmacia.tratamiento_prolongado</field>
             <field name="view_type">form</field>
+            <!-- <field name="view_mode">tree,form</field>  -->
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crear tratamiento prolongado

@@ -13,34 +13,52 @@
             <field name="flow_start" eval="True"/>
             <field name="kind">function</field>
             <field name="action">accion_borrador()</field>
-        </record> 
+        </record>
+           
         <record model="workflow.activity" id="activo">
             <field name="name">Activo</field>
             <field name="wkf_id" ref="wkf_tratamiento_prolongado"/>
             <field name="kind">function</field>
-            <field name="action">write()</field>
+            <field name="action">accion_activar()</field>
         </record>
-        <!--
-        <record model="workflow.activity" id="done">
-            <field name="name">Done</field>
-            <field name="wkf_id" ref="wkf_session"/>
+
+        <record model="workflow.activity" id="verifica_vencimiento">
+            <field name="name">Vencido</field>
+            <field name="wkf_id" ref="wkf_tratamiento_prolongado"/>
+            <field name="flow_stop">True</field>
             <field name="kind">function</field>
-            <field name="action">action_done()</field>
+            <field name="action">verificar_vencimiento()</field>
         </record>
-		 -->
-		<!--  
+        
+        <record model="workflow.activity" id="cancela_tp">
+            <field name="name">Cancelar</field>
+            <field name="wkf_id" ref="wkf_tratamiento_prolongado"/>
+            <field name="flow_stop">True</field>
+            <field name="kind">function</field>
+            <field name="action">accion_cancelar()</field>
+        </record>
+		
         <record model="workflow.transition" id="tp_borrador_activo">
             <field name="act_from" ref="borrador"/>
             <field name="act_to" ref="activo"/>
-            <field name="signal">write</field>
+            <field name="signal">activar</field>
         </record>
-        -->
+        
+        <record model="workflow.transition" id="activo_cancelado">
+            <field name="act_from" ref="activo"/>
+            <field name="act_to" ref="cancela_tp"/>
+            <field name="signal">cancelar</field>       
+        </record>
+                
+        <record model="workflow.transition" id="activo_vencido">
+            <field name="act_from" ref="activo"/>
+            <field name="act_to" ref="verifica_vencimiento"/> 
+            <field name="condition">fecha_vencimiento &lt; get_fecha_actual()</field>      
+        </record>
+               
+        <!--  <field name="signal">draft</field>
+            <field name=condition>fecha_vencimiento &eq; Date.today()</field>-->
         <!-- 
-        <record model="workflow.transition" id="session_confirmed_to_draft">
-            <field name="act_from" ref="confirmed"/>
-            <field name="act_to" ref="draft"/>
-            <field name="signal">draft</field>
-        </record>
         <record model="workflow.transition" id="session_done_to_draft">
             <field name="act_from" ref="done"/>
             <field name="act_to" ref="draft"/>

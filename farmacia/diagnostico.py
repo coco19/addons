@@ -2,10 +2,12 @@
 
 from openerp import fields, models
 
-class Diagnostico (models.Model):
+class Diagnostico(models.Model):
     
     _name = 'farmacia.diagnostico'
     
-    codigo = fields.Integer(string = "Codigo")
+    name = fields.Char(string = "Codigo")
     descripcion = fields.Text(string = "Descripcion")
     codifica = fields.Many2one('farmacia.capitulo')
+    comprende = fields.Many2many('farmacia.afeccion', 'farmacia_diagnostico_afeccion', 'diagnostico_id', 'afeccion_id', string="Afeciones comprendidas")
+    
